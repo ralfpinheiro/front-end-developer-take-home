@@ -49,7 +49,8 @@
                 </div>
                 <div class="col">
                     <button type="button" class="btn btn-primary mx-2" @click="create">Create</button>
-                    <button type="reset" class="btn btn-danger mx-2">Reset</button>
+                    <!-- TODO: Implement reset form functionality -->
+                    <button type="button" class="btn btn-danger mx-2">Reset</button>
                 </div>
             </div>
         </form>
@@ -92,7 +93,9 @@
                 // TODO: Dynamically increment the Index based on the number of vehicles
                 const index = 3;
 
-                this.$set(this.vehicles, index, this.form);
+                const formFields = { ...this.form }
+
+                this.$set(this.vehicles, index, formFields);
 
                 // TODO: Reset the form
             }
