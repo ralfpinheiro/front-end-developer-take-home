@@ -1,4 +1,4 @@
-Trackloop's Front End Take Home Project
+Chaintrack's Front End Take Home Project
 ===
 
 Hey Front End developer. Welcome. Your mission, should you choose to accept it, is to carve out 2 hours and complete the tasks outline below.
