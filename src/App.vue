@@ -100,6 +100,7 @@ export default {
         alert("Please fill in all fields!");
         return;
       }
+      reset();
     },
     reset() {
       this.form.year = "";
