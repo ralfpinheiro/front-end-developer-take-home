@@ -5,65 +5,23 @@
         <h1>Fleet Assets</h1>
       </div>
       <!-- TODO: Separate into a new component -->
-      <div class="col-12 p-0">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Year</th>
-              <th scope="col">Make</th>
-              <th scope="col">Model</th>
-              <th scope="col">Colour</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(vehicle, index) in vehicles" :key="index">
-              <td>{{ vehicle.year }}</td>
-              <td>{{ vehicle.make }}</td>
-              <td>{{ vehicle.model }}</td>
-              <td>{{ vehicle.colour }}</td>
-              <td>
-                <!-- TODO: Implement deleting the specified vehicle -->
-                <button
-                  type="button"
-                  class="btn btn-sm btn-outline-danger mx-2"
-                  @click="remove(index)"
-                >Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <vehicles-table :data="vehicles" @removeItem="remove($event)"></vehicles-table>
     </div>
-
     <!-- TODO: Separate into a new component-->
-    <form class="mt-4">
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Year" v-model="form.year">
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Make" v-model="form.make">
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Model" v-model="form.model">
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Colour" v-model="form.colour">
-        </div>
-        <div class="col">
-          <button type="button" class="btn btn-primary mx-2" @click="create">Create</button>
-          <!-- TODO: Implement reset form functionality -->
-          <button type="button" class="btn btn-danger mx-2" @click="reset">Reset</button>
-        </div>
-      </div>
-    </form>
+    <table-form :data="form" @createItem="create($event)" @resetForm="reset($event)"></table-form>
   </div>
 </template>
 
 <script>
+import VehiclesTable from "./VehiclesTable";
+import TableForm from "./TableForm";
+
 export default {
   name: "app",
+  components: {
+    VehiclesTable,
+    TableForm
+  },
   data() {
     return {
       vehicles: {
@@ -73,6 +31,7 @@ export default {
           model: "Econoline",
           colour: "White"
         },
+
         2: {
           year: "2017",
           make: "Mercedes",
@@ -80,6 +39,7 @@ export default {
           colour: "Black"
         }
       },
+
       form: {
         year: "",
         make: "",
@@ -88,13 +48,14 @@ export default {
       }
     };
   },
+
   methods: {
     create() {
       // TODO: Dynamically increment the Index based on the number of vehicles
       const index = Object.keys(this.vehicles).length + 1;
+
       const formFields = { ...this.form };
-      this.$set(this.vehicles, index, formFields);
-      // TODO: Reset the form
+
       if (
         formFields.year == "" ||
         formFields.make == "" ||
@@ -104,7 +65,12 @@ export default {
         alert("Please fill in all fields!");
         return;
       }
-      reset();
+
+      this.$set(this.vehicles, index, formFields);
+
+      this.reset();
+
+      // TODO: Reset the form
     },
     reset() {
       this.form.year = "";
@@ -120,6 +86,9 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #377dff;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
