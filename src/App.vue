@@ -91,6 +91,15 @@ export default {
       const formFields = { ...this.form };
       this.$set(this.vehicles, index, formFields);
       // TODO: Reset the form
+      if (
+        formFields.year == "" ||
+        formFields.make == "" ||
+        formFields.model == "" ||
+        formFields.colour == ""
+      ) {
+        alert("Please fill in all fields!");
+        return;
+      }
     },
     reset() {
       this.form.year = "";
