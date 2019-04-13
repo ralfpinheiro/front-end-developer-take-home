@@ -87,7 +87,7 @@ export default {
   methods: {
     create() {
       // TODO: Dynamically increment the Index based on the number of vehicles
-      const index = 3;
+      const index = Object.keys(this.vehicles).length + 1;
       const formFields = { ...this.form };
       this.$set(this.vehicles, index, formFields);
       // TODO: Reset the form
