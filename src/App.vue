@@ -24,7 +24,11 @@
               <td>{{ vehicle.colour }}</td>
               <td>
                 <!-- TODO: Implement deleting the specified vehicle -->
-                <button type="button" class="btn btn-sm btn-outline-danger mx-2">Delete</button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger mx-2"
+                  @click="remove(index)"
+                >Delete</button>
               </td>
             </tr>
           </tbody>
@@ -107,6 +111,9 @@ export default {
       this.form.make = "";
       this.form.model = "";
       this.form.colour = "";
+    },
+    remove(event) {
+      this.$delete(this.vehicles, event);
     }
   }
 };
